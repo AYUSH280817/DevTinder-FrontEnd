@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux"
 import { addUser } from "../utils/userSlice"
 import { useNavigate } from "react-router-dom"
 const Login=()=>{
-    const [email,setemail]=useState("ayushsingh@gmail.com")
-    const [password,setPassword]=useState("Ayush@2808")
+    const [email,setemail]=useState("")
+    const [password,setPassword]=useState("")
     const dispatch=useDispatch()
     const navigate=useNavigate()
     const handleLoginIn=async()=>{
@@ -15,10 +15,10 @@ const Login=()=>{
                 password,
             },{withCredentials:true})
             console.log(res)
+            
             dispatch(addUser(res.data))
             navigate("/");
-        }catch(err){
-         
+        }catch(err){      
           console.log(err)
         }
     }
@@ -28,7 +28,6 @@ const Login=()=>{
      <div className="card-body justify-center">
     <h2 className="card-title justify-center font-bold ">Login</h2>
     <div className="card-actions justify-center">
-
     <label className="form-control w-full max-w-xs">
     <div className="label">
     <span className="label-text">Email id</span>
@@ -54,12 +53,15 @@ const Login=()=>{
       className="input input-bordered w-full max-w-xs" 
       onChange={(e)=>setPassword(e.target.value)}
       />
-
     </label>
+    <div >
+    <p className="text-red-500 ">Error message is here </p>
     <button 
     className="btn btn-primary justify-center my-2"
     onClick={handleLoginIn}
     >Login</button>
+    </div>
+   
    </div>
    </div>
    </div>
